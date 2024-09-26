@@ -1,22 +1,22 @@
+// Definimos los endpoints para la API de Github
 const baseEndpoint = 'https://api.github.com';
 const usersEndpoint = `${baseEndpoint}/users`;
-const $n = document.querySelector('name');
+
+// Seleccionamos los elementos correctos del DOM usando id
+const $n = document.querySelector('#name');
 const $b = document.querySelector('#blog');
-const $l = document.querySelector('.location');
+const $l = document.querySelector('#location');
 
-function displayUser(username) {
-  $n.textContent = 'cargando...';
-  const response = await fetch(`${usersEndpoint}/${username}`);
-  console.log(data);
-  $n.textContent = '${data.name}';
-  $b.textContent = '${data.blog}';
-  $l.textContent = '${data.location}';
+// Hacemos la función asíncrona para manejar la llamada a la API correctamente
+async function displayUser(username) {
+  try {
+    // Mostramos un mensaje mientras se cargan los datos
+    $n.textContent = 'Cargando...';
+
+    // Hacemos la llamada a la API
+    const response = await fetch(`${usersEndpoint}/${username}`);
+    if (!response.ok) throw new Error('Usuario no encontrado'); // Manejo de errores
+
+    const data = await response.json(); // Convertimos la respuesta a JSON
+  }
 }
-
-function handleError(err) {
-  console.log('OH NO!');
-  console.log(err);
-  n.textContent = `Algo salió mal: ${err}`
-}
-
-displayUser('stolinski').catch(handleError);
